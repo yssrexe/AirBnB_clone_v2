@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import re
+import shlex
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -115,37 +117,36 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        try:
-            clname = args.split(" ")[0]
-        except IndexError:
-            pass
-        if not clname:
+        if not args:
             print("** class name missing **")
             return
-        elif clname not in HBNBCommand.classes:
+        arg_list = args.split(' ')
+        if arg_list[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        # create <Class name> <param 1> <param 2> <param 3>...
-        lists = args.split(" ")
-        
-        new_ins = eval(clname)()
-        
-        for i in range(1, len(lists)):
-            k, v = tuple(lists[i].split("-"))
-            if v.startswith('"'):
-                c = c.strip('"').replace("_", " ")
-            else:
+        obj = HBNBCommand.classes[arg_list[0]]()
+        print(obj.id)
+
+        # catch pattern <key name>=<value>
+        pattern = re.compile(r'^(\w+)="?(([\w.@,-]|\\")+)"?,?$')
+        arg_list = arg_list[1:]
+        for param in arg_list:
+
+            match = pattern.search(param)
+            if not match:
+                continue
+
+            key = match.group(1)
+            val = match.group(2).strip('"').replace('_', ' ')
+            if key in HBNBCommand.types.keys():
                 try:
-                    v = eval(v)
+                    setattr(obj, key, HBNBCommand.types[key](val))
                 except Exception:
-                    print(f"** couldn't evaluate {v}")
                     pass
-            if hasattr(new_ins, v):
-                setattr(new_ins, k, v)
-        
-        storage.new(new_ins)
-        print(new_ins.id)
-        new_ins.save()
+            else:
+                setattr(obj, key, str(val))
+
+        obj.save()
 
     def help_create(self):
         """ Help information for the create method """
