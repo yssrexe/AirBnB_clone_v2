@@ -62,11 +62,11 @@ class FileStorage:
             obj (_type_, optional): the object to delete
         """
         if obj is None:
-            pass
+            return
 
         obj_key = f"{obj.__class__.__name__}.{obj.id}"
 
         try:
             del self.__objects[obj_key]
         except KeyError:
-            return
+            pass
