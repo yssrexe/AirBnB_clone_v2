@@ -62,7 +62,7 @@ class FileStorage:
             obj (_type_, optional): the object to delete
         """
         if obj is None:
-            return
+            pass
 
         obj_key = f"{obj.__class__.__name__}.{obj.id}"
 
