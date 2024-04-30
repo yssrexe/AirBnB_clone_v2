@@ -8,6 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+
 class BaseModel:
     """A base class for all hbnb models"""
     id = Column(Integer(60), primary_key=True, nullable=False, unique=True)
@@ -16,13 +17,13 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
-        #if not kwargs:
+        # if not kwargs:
         #    from models import storage
         #    self.id = str(uuid.uuid4())
         #    self.created_at = datetime.now()
         #    self.updated_at = datetime.now()
         #    storage.new(self)
-        #else:
+        # else:
         #    kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
         #                                             '%Y-%m-%dT%H:%M:%S.%f')
         #    kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
@@ -67,8 +68,9 @@ class BaseModel:
         dictionary['updated_at'] = self.updated_at.isoformat()
         try:
             del dictionary['_sa_instance_state']
-        except:
+        except KeyError:
             pass
+
         return dictionary
 
     def delete(self):

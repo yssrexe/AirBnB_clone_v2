@@ -9,6 +9,7 @@ import os
 from models.city import City
 Base = declarative_base()
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
