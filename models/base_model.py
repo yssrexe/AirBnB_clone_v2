@@ -75,4 +75,4 @@ class BaseModel:
 
     def delete(self):
         from models import storage
-        del storage
+        storage.delete(self)
