@@ -6,7 +6,7 @@ This module deploys web_static to my servers
 from fabric.api import env
 
 env.hosts = ['54.242.98.93', '35.168.3.68']
-# store .tgz path
+# store .tgz pagth
 paths = []
 
 
