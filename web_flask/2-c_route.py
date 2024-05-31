@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""c_route"""
 from flask import Flask
 
 app = Flask(__name__)
