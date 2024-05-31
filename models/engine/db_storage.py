@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 """_summary_"""
 from sqlalchemy import create_engine
-from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
+from os import getenv
 
-from models.review import Review
-from models.state import State
-from models.user import User
+from models.base_model import Base, BaseModel
 from models.amenity import Amenity
 from models.city import City
 from models.place import Place
-from models.base_model import Base, BaseModel
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class DBStorage:
