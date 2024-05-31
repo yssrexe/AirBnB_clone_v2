@@ -46,7 +46,7 @@ def display_num(n):
 def odd_page(n):
     """This route returns a odd n string"""
     result = "even" if n % 2 == 0 else "odd"
-    return render_template("6-number_odd_or_even.html", n=n , result=result)
+    return render_template("6-number_odd_or_even.html", n=n, result=result)
 
 
 if __name__ == "__main__":
