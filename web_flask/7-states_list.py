@@ -19,8 +19,7 @@ def teardown_storage(exception=None):
 def states_list():
     """shows an html page with a list of states"""
 
-    states = list(storage.all(State).values(), key=lambda
-                    x: x.name)
+    states = [state for state in storage.all(State).values()]
     return render_template("7-states_list.html", states=states)
 
 
