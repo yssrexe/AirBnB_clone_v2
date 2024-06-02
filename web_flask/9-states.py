@@ -1,35 +1,31 @@
 #!/usr/bin/python3
-"""hello route"""
+"""
+Flask application to list states & cities
+"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
-from os import getenv
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def close_storage(exception=None):
-    """close storage"""
+def close_session(error):
+    """
+    Close session
+    """
     storage.close()
 
 
-@app.route('/states', strict_slashes=False)
-def ret_States():
-    """return states"""
-    states = storage.all(State).values()
-    return render_template('9-states.html', states=states)
-
-
-@app.route("/states/<id>", strict_slashes=False)
-def state_id(id):
-    """fetches a state by id and its cities and presents them on html page"""
-    state = None
-    try:
-        state = storage.all(State)[f'State.{id}']
-    except KeyError:
-        pass
-    return render_template("9-states.html", state=state)
+@app.route('/states')
+@app.route('/states/<id>')
+def states_and_cities(id=''):
+    """
+    List states and cities
+    """
+    states = storage.all(State)
+    return render_template('9-states.html', id=id, states=states)
 
 
 if __name__ == '__main__':
