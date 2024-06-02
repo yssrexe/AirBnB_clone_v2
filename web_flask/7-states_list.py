@@ -18,7 +18,7 @@ def close_session(request):
     storage.close()
 
 
-@app.route('/states_list')
+@app.route('/states_list', strict_slashes=False)
 def states():
     """
     List all states
