@@ -3,12 +3,12 @@
 	<head>
 		<title>AirBnB clone</title>
 
-		<link rel="shortcut icon" href="images/icon.ico" >
+		<link rel="shortcut icon" href="../static/images/icon.ico" >
 
-		<link rel="stylesheet" href="styles/4-common.css"/>
-		<link rel="stylesheet" href="styles/3-header.css"/>
-		<link rel="stylesheet" href="styles/3-footer.css"/>
-		<link rel="stylesheet" href="styles/6-filters.css"/>
+		<link rel="stylesheet" href="../static/styles/4-common.css"/>
+		<link rel="stylesheet" href="../static/styles/3-header.css"/>
+		<link rel="stylesheet" href="../static/styles/3-footer.css"/>
+		<link rel="stylesheet" href="../static/styles/6-filters.css"/>
 	</head>
     <body>
 		<header>
@@ -37,8 +37,8 @@
 					<h3>Amenities</h3>
 					<h4>&nbsp;</h4>
 					<ul class="popover">
-                        {% for amenty in amenties.values()|sort(attribute='name') %}
-						<li><h4>Internet</h4></li>
+                        {% for amenity in amenities.values()|sort(attribute='name') %}
+						<li><h4>{{ amenity.name }}</h4></li>
                         {% endfor %}
 					</ul>
 				</div>
