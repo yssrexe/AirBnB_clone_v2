@@ -16,6 +16,7 @@ def close_storage(exception=None):
 
 @app.route('/states', strict_slashes=False)
 def ret_States():
+    """return states"""
     states = storage.all(State).values()
     return render_template('9-states.html', states=states)
 
